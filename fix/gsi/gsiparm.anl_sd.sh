@@ -1,0 +1,92 @@
+gsi_namelist="
+ &SETUP
+   miter=${miter},niter(1)=${niter1},niter(2)=${niter2},
+   write_diag(1)=.true.,write_diag(2)=${write_diag_2},write_diag(3)=.true.,
+   qoption=2,print_obs_para=.true.,diag_radardbz=${diag_radardbz},
+   if_model_dbz=${if_model_dbz}, static_gsi_nopcp_dbz=0.0,
+   rmesh_dbz=4.0,rmesh_vr=4.0,zmesh_dbz=1000.0,zmesh_vr=1000.0,
+   missing_to_nopcp=.false.,radar_no_thinning=.true.,
+   gencode=78,factqmin=0.0,factqmax=0.0,
+   iguess=-1,
+   lread_obs_save=${lread_obs_save},lread_obs_skip=${lread_obs_skip},
+   ${ens_nstarthr:+"ens_nstarthr=$ens_nstarthr,"}
+   oneobtest=.false.,retrieval=.false.,
+   nhr_assimilation=3,l_foto=.false.,
+   use_pbl=.false.,use_prepb_satwnd=$ifsatbufr,
+   newpc4pred=.true.,adp_anglebc=.true.,angord=4,
+   passive_bc=.true.,use_edges=.false.,emiss_bc=.true.,
+   diag_precon=.true.,step_start=1.e-3,
+   l4densvar=.false.,nhr_obsbin=3,
+   use_gfs_nemsio=.false.,use_gfs_ncio=.true.,reset_bad_radbc=.true.,
+   netcdf_diag=.true.,binary_diag=.false.,
+   l_obsprvdiag=${l_obsprvdiag},
+ /     
+   netcdf_diag=${netcdf_diag},binary_diag=${binary_diag},
+ &GRIDOPTS
+   fv3_regional=.true.,grid_ratio_fv3_regional=${grid_ratio_fv3},nvege_type=20,
+   fv3_io_layout_y=${n_iolayouty},
+ /
+ &BKGERR
+   vs=${bkgerr_vs},
+   hzscl=${bkgerr_hzscl},
+   bw=0.,fstat=.true.,
+/
+   usenewgfsberror=${usenewgfsberror},
+ &ANBKGERR
+   anisotropic=.false.,
+ /
+ &JCOPTS
+ /
+ &STRONGOPTS
+ /
+ &OBSQC
+   dfact=0.75,dfact1=3.0,noiqc=.false.,c_varqc=0.02,vadfile='prepbufr',
+   vadwnd_l2rw_qc=.true.,
+ /
+ &OBS_INPUT
+   dmesh(1)=120.0,dmesh(2)=60.0,dmesh(3)=30,time_window_max=1.5,time_window_rad=1.0,ext_sonde=.true.,
+ /
+OBS_INPUT::
+!  dfile          dtype       dplat     dsis                 dval    dthin dsfcalc
+   pm25bufr       pm2_5       null      TEOM                 1.0     0     0
+::
+ &SUPEROB_RADAR
+   del_azimuth=5.,del_elev=.25,del_range=5000.,del_time=.5,elev_angle_max=5.,minnum=50,range_max=100000., l2superob_only=.false.,
+ /
+ &LAG_DATA
+ /
+ &HYBRID_ENSEMBLE
+   l_hyb_ens=false,
+   n_ens=0,
+   fv3sar_bg_opt=${fv3lam_bg_type},
+ /
+   l_hyb_ens=${ifhyb},
+   uv_hyb_ens=.true.,
+   q_hyb_ens=${q_hyb_ens},
+   aniso_a_en=.false.,generate_ens=.false.,
+   n_ens=${nummem},
+   beta_s0=${beta1_inv},s_ens_h=${ens_h},s_ens_v=${ens_v},
+   regional_ensemble_option=${regional_ensemble_option},
+   pseudo_hybens = .false.,
+   grid_ratio_ens = ${grid_ratio_ens},
+   l_ens_in_diff_time=.true.,
+   ensemble_path='',
+   i_en_perts_io=${i_en_perts_io},
+   jcap_ens=574,
+   fv3sar_bg_opt=${fv3lam_bg_type},
+   readin_localization=${readin_localization},
+   ens_fast_read=${ens_fast_read},
+ &RAPIDREFRESH_CLDSURF
+ /
+ &CHEM
+  laeroana_fv3smoke=.true.,
+  berror_fv3_cmaq_regional = .true.,
+ /
+ &NST
+ /
+ &SINGLEOB_TEST
+   maginnov=1.0,magoberr=0.8,oneob_type='t',
+   oblat=38.,oblon=279.,obpres=500.,obdattim=2020040500,
+   obhourset=0.,
+ /
+"
