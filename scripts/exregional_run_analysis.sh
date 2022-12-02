@@ -656,6 +656,7 @@ if [[ ${gsi_type} == "ANALYSIS" && ${ob_type} == "AERO" ]]; then
   ii_use_2mt4b=0
   netcdf_diag=.true.
   binary_diag=.false.
+  usenewgfsberror=.false.
 fi
 
 SATINFO=${FIX_GSI}/global_satinfo.txt

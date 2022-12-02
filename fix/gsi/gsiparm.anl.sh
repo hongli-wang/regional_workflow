@@ -202,8 +202,6 @@ OBS_INPUT::
   laeroana_fv3smoke=.true.,
   berror_fv3_cmaq_regional = .true.,
  /
-  laeroana_fv3smoke=.true.,
-  berror_fv3_cmaq_regional = .true.,
  &NST
  /
  &SINGLEOB_TEST
