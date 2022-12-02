@@ -226,8 +226,6 @@ OBS_INPUT::
   berror_fv3_cmaq_regional = .true.,
 >>>>>>> Refine for RRFS-SD DA
  /
-  laeroana_fv3smoke=.true.,
-  berror_fv3_cmaq_regional = .true.,
  &NST
  /
  &SINGLEOB_TEST
