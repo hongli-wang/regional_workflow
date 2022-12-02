@@ -47,6 +47,7 @@ gsi_namelist="
  /
 OBS_INPUT::
 !  dfile          dtype       dplat     dsis                 dval    dthin dsfcalc
+   pm25bufr       pm2_5       null      TEOM                 1.0     0     0
    dbzobs.nc      dbz         null      dbz                  1.0     0     0
    prepbufr       ps          null      ps                   1.0     0     0
    prepbufr       t           null      t                    1.0     0     0
@@ -188,8 +189,8 @@ OBS_INPUT::
    build_cloud_frac_p=0.50,
    clear_cloud_frac_p=0.10,
    iclean_hydro_withRef_allcol=1,
-   i_use_2mQ4B=2,
-   i_use_2mT4B=1,
+   i_use_2mQ4B=${ii_use_2mq4b},
+   i_use_2mT4B=${ii_use_2mt4b},
    i_gsdcldanal_type=0,
    i_gsdsfc_uselist=1,
    i_lightpcp=1,
@@ -198,7 +199,11 @@ OBS_INPUT::
    i_gsdqc=2,
  /
  &CHEM
+  laeroana_fv3smoke=.true.,
+  berror_fv3_cmaq_regional = .true.,
  /
+  laeroana_fv3smoke=.true.,
+  berror_fv3_cmaq_regional = .true.,
  &NST
  /
  &SINGLEOB_TEST

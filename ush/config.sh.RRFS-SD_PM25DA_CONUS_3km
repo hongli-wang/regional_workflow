@@ -1,8 +1,10 @@
-MACHINE="hera"
-ACCOUNT="wrfruc"
+MACHINE="jet"
+ACCOUNT="nrtrr"
+#MACHINE="hera"
+#ACCOUNT="wrfruc"
 #RESERVATION="rrfsdet"
 #RESERVATION_POST="rrfsdet"
-EXPT_BASEDIR="/scratch1/BMC/wrfruc/hwang/base_e2/RRFS-SD_T4"
+EXPT_BASEDIR="/mnt/lfs1/BMC/wrfruc/hwang/base_e/RRFS-SD_T4"
 EXPT_SUBDIR="RRFS_CONUS_3km_rt"
 
 if [[ -n $RESERVATION ]] ; then
@@ -218,9 +220,9 @@ COMINgfs=""
 
 . set_rrfs_config.sh
 
-STMP="/scratch1/BMC/wrfruc/hwang/base_e2/RRFS-SD_T4/NCO_dirs/stmp"  # Path to directory STMP that mostly contains input files.
-PTMP="/scratch1/BMC/wrfruc/hwang/base_e2/RRFS-SD_T4/NCO_dirs/ptmp"  # Path to directory STMP that mostly contains input files.
-NWGES="/scratch1/BMC/wrfruc/hwang/base_e2/RRFS-SD_T4/NCO_dirs/nwges"  # Path to directory NWGES that save boundary, cold initial, restart files
+STMP="/mnt/lfs1/BMC/wrfruc/hwang/base_e/RRFS-SD_T4/NCO_dirs/stmp"  # Path to directory STMP that mostly contains input files.
+PTMP="/mnt/lfs1/BMC/wrfruc/hwang/base_e/RRFS-SD_T4/NCO_dirs/ptmp"  # Path to directory STMP that mostly contains input files.
+NWGES="/mnt/lfs1/BMC/wrfruc/hwang/base_e/RRFS-SD_T4/NCO_dirs/nwges"  # Path to directory NWGES that save boundary, cold initial, restart files
 if [[ ${regional_ensemble_option} == "5" ]]; then
   RRFSE_NWGES="/mnt/lfs1/BMC/wrfruc/hwang/RRFS-SD_T4/NCO_dirs/nwges"  # Path to RRFSE directory NWGES that mostly contains ensemble restart files for GSI hybrid.
   NUM_ENS_MEMBERS=10     # FV3LAM ensemble size for GSI hybrid analysis
