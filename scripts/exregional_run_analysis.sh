@@ -348,8 +348,8 @@ niter2=50
 lread_obs_save=.false.
 lread_obs_skip=.false.
 if_model_dbz=.false.
-ii_use_2mq4b=2
-ii_use_2mt4b=1
+i_use_2mQ4B=2
+i_use_2mT4B=1
 
 # Determine if hybrid option is available
 memname='atmf009'
@@ -641,6 +641,10 @@ BERROR=${FIX_GSI}/${BERROR_FN}
 
 
 if [[ ${gsi_type} == "ANALYSIS" && ${ob_type} == "AERO" ]]; then
+  if [ ${BKTYPE} -eq 1 ]; then
+    echo "cold start, skip GSI SD DA"
+    exit 0
+  fi
   ANAVINFO=${FIX_GSI}/${ANAVINFO_SD_FN}
   CONVINFO=${FIX_GSI}/${CONVINFO_SD_FN}
   BERROR=${FIX_GSI}/${BERROR_SD_FN}
@@ -652,11 +656,13 @@ if [[ ${gsi_type} == "ANALYSIS" && ${ob_type} == "AERO" ]]; then
   l_hyb_ens=.false.
   nummem=0
   beta1_inv=0.0
-  ii_use_2mq4b=0
-  ii_use_2mt4b=0
+  i_use_2mQ4B=0
+  i_use_2mT4B=0
   netcdf_diag=.true.
   binary_diag=.false.
   usenewgfsberror=.false.
+  laeroana_fv3smoke=.true.
+  berror_fv3_cmaq_regional=.true.
 fi
 
 SATINFO=${FIX_GSI}/global_satinfo.txt
@@ -858,14 +864,6 @@ cat << EOF > gsiparm.anl
 $gsi_namelist
 EOF
 
-if [[ ${gsi_type} == "ANALYSIS" && ${ob_type} != "AERO" ]]; then
-# base_e GSI can't handle the below two parameter for RRFS-SD DA. So delete them.
-  mv gsiparm.anl gsiparm.anl.sd
-  sed '/laeroana_fv3smoke/d' gsiparm.anl.sd > gsiparm.anl.1
-  sed '/berror_fv3_cmaq_regional/d' gsiparm.anl.1 > gsiparm.anl
-  rm -fr gsiparm.anl.sd gsiparm.anl.1
-fi
-
 #
 #-----------------------------------------------------------------------
 #
@@ -908,39 +906,6 @@ fi
 #-----------------------------------------------------------------------
 #
 # comment out for testing
-if [[ ${gsi_type} == "ANALYSIS" && ${ob_type} == "AERO" ]]; then
-
-if [ ${BKTYPE} -eq 1 ]; then
- print_info_msg "$VERBOSE" "
- Coldstart skip GSI SD DA"
-else
-# backup background 
-  if [ "${IO_LAYOUT_Y}" == "1" ]; then
-    cp -fr ${bkpath}/fv_tracer.res.tile1.nc ${bkpath}/fv_tracer.res.tile1.nc.org
-  else
-    for ii in ${list_iolayout}
-    do
-      iii=`printf %4.4i $ii`
-      cp -fr  ${bkpath}/fv_tracer.res.tile1.nc.${iii} ${bkpath}/fv_tracer.res.tile1.nc.${iii}.org
-    done
-  fi
-
-  $APRUN ./gsi.x < gsiparm.anl > stdout 2>&1 || print_err_msg_exit "\
-  Call to executable to run GSI returned with nonzero exit code."
-
-# copy updated fv3_tracer back to  restart
-  if [ "${IO_LAYOUT_Y}" == "1" ]; then
-    cp -fr  fv3_tracer ${bkpath}/fv_tracer.res.tile1.nc
-  else
-    for ii in ${list_iolayout}
-    do
-      iii=`printf %4.4i $ii`
-      cp -fr   fv3_tracer.${iii} ${bkpath}/fv_tracer.res.tile1.nc.${iii}
-    done
-  fi
-fi
-
-else
 
 $APRUN ./gsi.x < gsiparm.anl > stdout 2>&1 || print_err_msg_exit "\
 Call to executable to run GSI returned with nonzero exit code."
