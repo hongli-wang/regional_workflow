@@ -203,13 +203,8 @@ OBS_INPUT::
    build_cloud_frac_p=0.50,
    clear_cloud_frac_p=0.10,
    iclean_hydro_withRef_allcol=1,
-<<<<<<< HEAD
    i_use_2mQ4B=${i_use_2mQ4B},
    i_use_2mT4B=${i_use_2mT4B},
-=======
-   i_use_2mQ4B=${ii_use_2mq4b},
-   i_use_2mT4B=${ii_use_2mt4b},
->>>>>>> Refine for RRFS-SD DA
    i_gsdcldanal_type=0,
    i_gsdsfc_uselist=1,
    i_lightpcp=1,
@@ -218,13 +213,8 @@ OBS_INPUT::
    i_gsdqc=2,
  /
  &CHEM
-<<<<<<< HEAD
   laeroana_fv3smoke=${laeroana_fv3smoke},
   berror_fv3_cmaq_regional=${berror_fv3_cmaq_regional},
-=======
-  laeroana_fv3smoke=.true.,
-  berror_fv3_cmaq_regional = .true.,
->>>>>>> Refine for RRFS-SD DA
  /
  &NST
  /
