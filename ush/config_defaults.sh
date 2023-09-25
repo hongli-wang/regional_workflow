@@ -724,6 +724,7 @@ i_precip_vertical_check=0
 #  &CHEM 
 laeroana_fv3smoke=.false.
 berror_fv3_cmaq_regional=.false.
+berror_fv3_sd_regional=.false.
 #-----------------------------------------------------------------------
 # HYBENSMEM_NMIN:
 #    Minimum number of ensemble members required a hybrid GSI analysis 

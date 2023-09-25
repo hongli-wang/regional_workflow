@@ -538,7 +538,13 @@ else
 
 
   if [ ${anav_type} == "AERO" ]; then
-    obs_files_source[0]=${OBSPATH_PM}/${YYYYMMDD}/pm25.airnow.${YYYYMMDD}${HH}.bufr
+# for previous retro runs
+#    obs_files_source[0]=${OBSPATH_PM}/${YYYYMMDD}/pm25.airnow.${YYYYMMDD}${HH}.bufr
+    if [ ${cycle_type} == "spinup" ]; then
+      obs_files_source[0]=${cycle_dir}/process_pm_spinup/pm.bufr
+    else
+      obs_files_source[0]=${cycle_dir}/process_pm/pm.bufr
+    fi 
     obs_files_target[0]=pm25bufr
   fi
 
@@ -702,6 +708,7 @@ if [[ ${gsi_type} == "ANALYSIS" && ${anav_type} == "AERO" ]]; then
   miter=1
   niter1=100
   niter2=0
+  write_diag_2=.true.
   ifhyb=.false.
   ifsd_da=.true.
   l_hyb_ens=.false.
@@ -713,7 +720,9 @@ if [[ ${gsi_type} == "ANALYSIS" && ${anav_type} == "AERO" ]]; then
   binary_diag=.false.
   usenewgfsberror=.false.
   laeroana_fv3smoke=.true.
+#remove cmaq when GSL GSI is update in future
   berror_fv3_cmaq_regional=.true.
+  berror_fv3_sd_regional=.true.
 fi
 
 SATINFO=${FIX_GSI}/global_satinfo.txt
