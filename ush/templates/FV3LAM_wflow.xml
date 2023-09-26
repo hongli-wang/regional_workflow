@@ -1370,9 +1370,6 @@ MODULES_RUN_TASK_FP script.
        <and>
          <timedep><cyclestr offset="&START_TIME_CONVENTIONAL;">@Y@m@d@H@M00</cyclestr></timedep>
          <taskdep task="&PREP_CYC_TN;_spinup{{ uscore_ensmem_name }}"/>
-         {%- if do_sddacycle %}
-         <taskdep task="&ANAL_SD_GSI_TN;_spinup"/>
-         {%- endif %}
          {%- if use_rrfse_ens %}
          {%- if do_retro %}
          <and>
@@ -2331,9 +2328,6 @@ MODULES_RUN_TASK_FP script.
        <and>
          <timedep><cyclestr offset="&START_TIME_CONVENTIONAL;">@Y@m@d@H@M00</cyclestr></timedep>
          <taskdep task="&PREP_CYC_TN;_prod{{ uscore_ensmem_name }}"/>
-         {%- if do_sddacycle %}
-         <taskdep task="&ANAL_SD_GSI_TN;_prod"/>
-         {%- endif %}
          {%- if use_rrfse_ens %}
          {%- if do_envar_radar_ref and do_envar_radar_ref_once %}
          <taskdep task="&PROCESS_RADAR_REF_TN;_prod"/>
