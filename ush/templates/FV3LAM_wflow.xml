@@ -1346,8 +1346,8 @@ MODULES_RUN_TASK_FP script.
 
     <dependency>
        <and>
-         <timedep><cyclestr offset="&START_TIME_PROCPM;">@Y@m@d@H@M00</cyclestr></timedep>
-         <taskdep task="&PROCESS_PM_TN;_spinup"/>
+         <timedep><cyclestr offset="&START_TIME_CONVENTIONAL;">@Y@m@d@H@M00</cyclestr></timedep>
+          <taskdep task="&PREP_CYC_TN;_prod{{ uscore_ensmem_name }}"/>
        </and>
     </dependency>
 
@@ -2271,8 +2271,8 @@ MODULES_RUN_TASK_FP script.
     <envar><name>nens</name><value>{{ num_ens_members }}</value></envar>
     <dependency>
        <and>
-         <timedep><cyclestr offset="&START_TIME_PROCPM;">@Y@m@d@H@M00</cyclestr></timedep>
-         <taskdep task="&PROCESS_PM_TN;_prod"/>
+         <timedep><cyclestr offset="&START_TIME_CONVENTIONAL;">@Y@m@d@H@M00</cyclestr></timedep>
+          <taskdep task="&PREP_CYC_TN;_prod{{ uscore_ensmem_name }}"/>
        </and>
     </dependency>
 

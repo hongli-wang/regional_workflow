@@ -2106,9 +2106,6 @@ DO_ENS_RADDA="FALSE"
 # DO_DACYCLE:
 # Flag that determines whether to run a data assimilation cycle.
 #
-# DO_SDDACYCLE:
-# Flag that determines whether to run a SMOKE and DUST data assimilation cycle.
-#
 # DO_SURFACE_CYCLE:
 # Flag that determines whether to continue cycle surface fields.
 #
@@ -2142,7 +2139,6 @@ DO_ENS_RADDA="FALSE"
 # Use CLM mode in the model
 #-----------------------------------------------------------------------
 DO_DACYCLE="FALSE"
-DO_SDDACYCLE="FALSE"
 DO_SURFACE_CYCLE="FALSE"
 SURFACE_CYCLE_DELAY_HRS="1"
 DO_SOIL_ADJUST="FALSE"
