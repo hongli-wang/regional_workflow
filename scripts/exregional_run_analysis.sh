@@ -424,7 +424,11 @@ if [ ${BKTYPE} -eq 1 ]; then  # cold start uses background from INPUT
 else                          # cycle uses background from restart
   if [ "${IO_LAYOUT_Y}" == "1" ]; then
     ln_vrfy  -snf ${bkpath}/fv_core.res.tile1.nc             fv3_dynvars
-    ln_vrfy  -snf ${bkpath}/fv_tracer.res.tile1.nc           fv3_tracer
+    if [ ${anav_type} == "AERO" ]; then
+      cp_vrfy ${bkpath}/fv_tracer.res.tile1.nc               fv3_tracer
+    else
+      ln_vrfy  -snf ${bkpath}/fv_tracer.res.tile1.nc         fv3_tracer
+    fi
     ln_vrfy  -snf ${bkpath}/sfc_data.nc                      fv3_sfcdata
     ln_vrfy  -snf ${bkpath}/phy_data.nc                      fv3_phyvars
   else
@@ -432,10 +436,15 @@ else                          # cycle uses background from restart
     do
       iii=`printf %4.4i $ii`
       ln_vrfy  -snf ${bkpath}/fv_core.res.tile1.nc.${iii}     fv3_dynvars.${iii}
-      ln_vrfy  -snf ${bkpath}/fv_tracer.res.tile1.nc.${iii}   fv3_tracer.${iii}
+      if [ ${anav_type} == "AERO" ]; then
+        cp_vrfy ${bkpath}/fv_tracer.res.tile1.nc.${iii}       fv3_tracer.${iii}
+      else
+        ln_vrfy  -snf ${bkpath}/fv_tracer.res.tile1.nc.${iii} fv3_tracer.${iii}
+      fi
       ln_vrfy  -snf ${bkpath}/sfc_data.nc.${iii}              fv3_sfcdata.${iii}
       ln_vrfy  -snf ${bkpath}/phy_data.nc.${iii}              fv3_phyvars.${iii}
       ln_vrfy  -snf ${gridspec_dir}/fv3_grid_spec.${iii}      fv3_grid_spec.${iii}
+
     done
   fi
   fv3lam_bg_type=0

@@ -1463,6 +1463,9 @@ MODULES_RUN_TASK_FP script.
 
     <dependency>
        <taskdep task="&ANAL_GSI_TN;_spinup{{ uscore_ensmem_name }}"/>
+       {%- if do_pm_da %}
+         <taskdep task="&ANAL_SD_GSI_TN;_spinup{{ uscore_ensmem_name }}"/>
+       {%- endif %}
     </dependency>
 
   </task>
@@ -2389,6 +2392,9 @@ MODULES_RUN_TASK_FP script.
 
     <dependency>
        <taskdep task="&ANAL_GSI_TN;_prod{{ uscore_ensmem_name }}"/>
+       {%- if do_pm_da %}
+         <taskdep task="&ANAL_SD_GSI_TN;_prod{{ uscore_ensmem_name }}"/>
+       {%- endif %}
     </dependency>
 
   </task>
