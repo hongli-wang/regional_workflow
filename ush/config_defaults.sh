@@ -315,6 +315,10 @@ EXPT_SUBDIR=""
 #   RAPHRR_SOIL_ROOT: locations of RAP/HRRR forecast netcdf files
 #   SOIL_SURGERY_time: cycle time for soil surgery 
 #
+# Setup default data locations for cycle surface/bias correction coefficient
+#   smoke/dust during machine switch and version update
+#   CONT_CYCLE_DATA_ROOT: locations of surface, bias correction coefficient files
+#
 # Setup default locations for FIRE_RRFS files and update time
 #  FIRE_RAVE_DIR
 #  FIRE_RRFS_ROOT
@@ -360,6 +364,7 @@ SOIL_SURGERY_time=9999999999
 FIRE_RAVE_DIR="/lfs4/BMC/public/data/grids/nesdis/3km_fire_emissions"
 FIRE_RRFS_ROOT="/mnt/lfs4/BMC/gsd-fv3-dev/FIRE_RRFS_ROOT"
 FIRE_RRFS_update_hour=99
+CONT_CYCLE_DATA_ROOT="/lfs/h2/emc/lam/noscrub/emc.lam/nwges"
 
 #
 #-----------------------------------------------------------------------
@@ -721,6 +726,7 @@ i_use_2mT4B=0
 i_T_Q_adjust=1
 l_rtma3d=.false.
 i_precip_vertical_check=0
+l_cld_uncertainty=.false.
 #  &CHEM 
 laeroana_fv3smoke=.false.
 berror_fv3_cmaq_regional=.false.
@@ -1294,6 +1300,9 @@ OUTPUT_FH="-1"
 # WRTCMP_write_tasks_per_group:
 # The number of MPI tasks to allocate for each write group.
 #
+# WRTCMP_output_file:
+# The output file format.
+#
 # PRINT_ESMF:
 # Flag for whether or not to output extra (debugging) information from
 # ESMF routines.  Must be "TRUE" or "FALSE".  Note that the write
@@ -1309,6 +1318,7 @@ PRINT_ESMF="FALSE"
 
 WRTCMP_write_groups="1"
 WRTCMP_write_tasks_per_group="20"
+WRTCMP_output_file="netcdf"
 
 WRTCMP_output_grid="''"
 WRTCMP_cen_lon=""
@@ -1622,6 +1632,12 @@ FIXgsm_FILES_TO_COPY_TO_FIXam=( \
 "fix_co2_proj/global_co2historicaldata_2016.txt" \
 "fix_co2_proj/global_co2historicaldata_2017.txt" \
 "fix_co2_proj/global_co2historicaldata_2018.txt" \
+"fix_co2_proj/global_co2historicaldata_2019.txt" \
+"fix_co2_proj/global_co2historicaldata_2020.txt" \
+"fix_co2_proj/global_co2historicaldata_2021.txt" \
+"fix_co2_proj/global_co2historicaldata_2022.txt" \
+"fix_co2_proj/global_co2historicaldata_2023.txt" \
+"fix_co2_proj/global_co2historicaldata_2024.txt" \
 "global_co2historicaldata_glob.txt" \
 "co2monthlycyc.txt" \
 "global_h2o_pltc.f77" \
@@ -1671,6 +1687,12 @@ CYCLEDIR_LINKS_TO_FIXam_FILES_MAPPING=( \
 "co2historicaldata_2016.txt | fix_co2_proj/global_co2historicaldata_2016.txt" \
 "co2historicaldata_2017.txt | fix_co2_proj/global_co2historicaldata_2017.txt" \
 "co2historicaldata_2018.txt | fix_co2_proj/global_co2historicaldata_2018.txt" \
+"co2historicaldata_2019.txt | fix_co2_proj/global_co2historicaldata_2019.txt" \
+"co2historicaldata_2020.txt | fix_co2_proj/global_co2historicaldata_2020.txt" \
+"co2historicaldata_2021.txt | fix_co2_proj/global_co2historicaldata_2021.txt" \
+"co2historicaldata_2022.txt | fix_co2_proj/global_co2historicaldata_2022.txt" \
+"co2historicaldata_2023.txt | fix_co2_proj/global_co2historicaldata_2023.txt" \
+"co2historicaldata_2024.txt | fix_co2_proj/global_co2historicaldata_2024.txt" \
 "co2historicaldata_glob.txt | global_co2historicaldata_glob.txt" \
 "co2monthlycyc.txt          | co2monthlycyc.txt" \
 "global_h2oprdlos.f77       | global_h2o_pltc.f77" \
